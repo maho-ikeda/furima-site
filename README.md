@@ -24,6 +24,7 @@
 | name          | string     | null: false       |
 | price         | integer    | null: false       |
 | user          | references | foreign_key: true |
+| explanation   | text       | null: false       |
 | category_id   | integer    | null: false       |
 | condition_id  | integer    | null: false       |
 | cost_id       | integer    | null: false       |
