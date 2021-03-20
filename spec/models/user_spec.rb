@@ -48,11 +48,12 @@ describe User do
         end
 
         it 'メールアドレスが重複している' do
-            @user.save
-            @another_user = FactoryBot.build(:user)
-            @another_user.email = "test@gmail.com" 
-            @another_user.valid?
-            expect(@another_user.errors.full_messages).to include("Email has already been taken")
+          @user.email = "test.taro@gmail.com"
+          @user.save
+          @another_user = FactoryBot.build(:user)
+          @another_user.email = "test.taro@gmail.com"
+          @another_user.valid?
+          expect(@another_user.errors.full_messages).to include("Email has already been taken")
         end
 
         it 'メールアドレスに@がない' do
