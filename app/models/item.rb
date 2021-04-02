@@ -5,16 +5,11 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
     belongs_to :caterory
-    belongs_to :condition
-    belongs_to :cost
-    belongs_to :prefucture
-    belongs_to :lead_time
-  end
-
 
   with_options presence: true do
+    validates :image
     validates :name
-    validates :price
+    validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
     validates :explanation
     validates :category_id
     validates :condition_id
@@ -25,9 +20,9 @@ class Item < ApplicationRecord
 
   with_options numericality: { other_than: 1 } do
     validates :category_id
-    validates :conditon_id
+    validates :condition_id
     validates :cost_id
-    validates :prefucture_id
+    validates :prefecture_id
     validates :lead_time_id
   end
 end
