@@ -3,6 +3,15 @@ class Item < ApplicationRecord
   #has_one :order
   has_one_attached :image
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :caterory
+    belongs_to :condition
+    belongs_to :cost
+    belongs_to :prefucture
+    belongs_to :lead_time
+  end
+
+
   with_options presence: true do
     validates :name
     validates :price
@@ -14,29 +23,11 @@ class Item < ApplicationRecord
     validates :lead_time_id
   end
 
-
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :conditon_id
+    validates :cost_id
+    validates :prefucture_id
+    validates :lead_time_id
+  end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-ーーーーーーーーーーーー
-| Column        | Type       | Options           |
-| ------------- | ---------- | ----------------- |
-| name          | string     | null: false       |
-| price         | integer    | null: false       |
-| user          | references | foreign_key: true |
-| explanation   | text       | null: false       |
-| category_id   | integer    | null: false       |
-| condition_id  | integer    | null: false       |
-| cost_id       | integer    | null: false       |
-| prefecture_id | integer    | null: false       |
-| lead_time_id  | integer    | null: false       |
