@@ -4,7 +4,16 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-    belongs_to :caterory
+    belongs_to :category
+  extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :condition
+  extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :cost
+  extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :prefecture
+  extend ActiveHash::Associations::ActiveRecordExtensions
+    belongs_to :lead_time
+  
 
   with_options presence: true do
     validates :image
