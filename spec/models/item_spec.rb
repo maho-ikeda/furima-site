@@ -62,7 +62,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '商品の写真が存在しない' do
-          @item.image.attach
+          @item.image.attach ()
           @item.valid?
           expect(@item.errors.full_messages).to include("Image can't be blank")
         end
