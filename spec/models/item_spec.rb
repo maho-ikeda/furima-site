@@ -142,8 +142,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-
-
-
-#半角英数混合では登録できないこと
-#

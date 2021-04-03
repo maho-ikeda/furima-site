@@ -5,19 +5,14 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :condition
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :cost
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :lead_time
 
   with_options presence: true do
     validates :image
     validates :name, { length: { maximum: 40 } }
-    #validates :price, format: { with: /\A[0-9]+\z/ }, inclusion: { in: 300..9_999_999 }
     validates :price, numericality: { only_integer: true }, inclusion: { in: 300..9_999_999 }    
     validates :explanation, { length: { maximum: 1000 } }
     validates :category_id
