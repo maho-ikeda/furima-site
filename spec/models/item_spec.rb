@@ -108,6 +108,20 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include("Lead time must be other than 1")
         end
+
+        it '価格が300円より低い' do
+          @item.price = "299"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is not included in the list")
+        end
+
+        it '価格が9,999,999円より高い' do
+          @item.price = "10000000"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is not included in the list")
+        end
+
+
       end
     end
   end
