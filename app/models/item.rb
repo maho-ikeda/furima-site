@@ -17,7 +17,8 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :image
     validates :name, { length: { maximum: 40 } }
-    validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+    #validates :price, format: { with: /\A[0-9]+\z/ }, inclusion: { in: 300..9_999_999 }
+    validates :price, numericality: { only_integer: true }, inclusion: { in: 300..9_999_999 }    
     validates :explanation, { length: { maximum: 1000 } }
     validates :category_id
     validates :condition_id
