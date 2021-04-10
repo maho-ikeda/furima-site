@@ -34,6 +34,10 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    redirect_to root_path
+  end
+
   private
 
   def item_params
@@ -49,7 +53,4 @@ class ItemsController < ApplicationController
     redirect_to action: :index unless @item.user_id == current_user.id
   end
 
-  # def destroy
-  #  redirect_to root_path
-  # end
 end
