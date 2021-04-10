@@ -62,7 +62,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '商品の写真が存在しない' do
-          @item.image.attach ()
+          @item.image.attach
           @item.valid?
           expect(@item.errors.full_messages).to include("Image can't be blank")
         end
@@ -116,25 +116,25 @@ RSpec.describe Item, type: :model do
         end
 
         it '価格が9,999,999円より高い' do
-          @item.price = 10000000
+          @item.price = 10_000_000
           @item.valid?
           expect(@item.errors.full_messages).to include('Price is not included in the list')
         end
 
         it '全角文字では登録できないこと' do
-          @item.price = "３００"
+          @item.price = '３００'
           @item.valid?
           expect(@item.errors.full_messages).to include('Price is not a number', 'Price is not included in the list')
         end
 
         it '半角英数混合では登録できないこと' do
-          @item.price = "300yen"
+          @item.price = '300yen'
           @item.valid?
           expect(@item.errors.full_messages).to include('Price is not a number')
         end
 
         it '半角英語だけでは登録できないこと' do
-          @item.price = "threehundred"
+          @item.price = 'threehundred'
           @item.valid?
           expect(@item.errors.full_messages).to include('Price is not a number', 'Price is not included in the list')
         end
