@@ -1,6 +1,6 @@
 class OrderForm
   include ActiveModel::Model
-  attr_accessor :item, :user, :order, :postal_code, :prefecture, :city, :addresses, :city, :building, :phone_number
+  attr_accessor :item, :user, :price, :order, :postal_code, :prefecture, :city, :addresses, :city, :building, :phone_number
 
   with_options presence: true do
     validates :postal_code
