@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   def index
+    @order_form = OrderForm.new
   end
 
   def create
-    order = Order.create(order_params)
+    @order_form = OrderForm.create(order_params)
     redirect_to "/items/#{order.item.id}" 
   end
 
