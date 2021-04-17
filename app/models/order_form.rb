@@ -4,7 +4,7 @@ class OrderForm
 
   with_options presence: true do
     validates :postal_code
-    validates :prefecture_id
+    validates :prefecture
     validates :city
     validates :addresses
     validates :phone_number
