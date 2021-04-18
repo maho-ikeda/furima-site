@@ -1,8 +1,25 @@
 const pay = () => {
-  const form = document.getElementById("charge-form");
+  Payjp.setPublicKey("pk_test_e2f08c294ea23550e83b1fd1"); 
+  const form = document.getElementById('charge-form');
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("フォーム送信時にイベント発火")
+    
+    const formResult = document.getElementById('charge-form');
+    const formData = new FormData(formResult);
+
+    const card = {
+      number: formData.get("order[number]"),
+      cvc: formData.get("order[cvc]"),
+      exp_month: formData.get("order[exp_month]"),
+      exp_year: `20${formData.get("order[exp_year]")}`,
+    };
+
+    Payjp.createToken(card, (status, response) => {
+      if (status == 200) {
+        const token = response.id;
+        console.log(token)
+      }
+    });
   });
 };
 
