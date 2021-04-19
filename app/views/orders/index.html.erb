@@ -31,7 +31,7 @@
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with model:@order_form, url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap' ,local: true do |f| %>
+    <%= form_with model: @order_form, url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap' ,local: true do |f| %>
 
      <%= render 'shared/error_messages', model: f.object %>
      
@@ -61,7 +61,7 @@
         <div class='input-expiration-date-wrap'>
           <%= f.text_area :exp_month, class:"input-expiration-date", id:"card-exp-month", placeholder:"例)3" %>
            <p>月</p>
-           <%= f.text_field :exp_year, class:"input-expiration-date", id:"card-exp-year", placeholder:"例)23" %>
+           <%= f.text_area :exp_year, class:"input-expiration-date", id:"card-exp-year", placeholder:"例)23" %>
            <p>年</p>
         </div>
       </div>
