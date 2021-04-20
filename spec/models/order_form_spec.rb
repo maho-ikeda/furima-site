@@ -12,7 +12,12 @@ RSpec.describe OrderForm, type: :model do
           expect(@order_form).to be_valid
         end
 
-        it '郵便番号がが正しく入力されている' do
+        it 'tokenが入っている' do
+          @order_form.token = "tok_abcdefghijk1111111111111111111111"
+          expect(@order_form).to be_valid
+        end
+
+        it '郵便番号が正しく入力されている' do
           @order_form.postal_code = "321-7654"
           expect(@order_form).to be_valid
         end
@@ -44,6 +49,12 @@ RSpec.describe OrderForm, type: :model do
       end
 
       context '購入する商品の登録・保存ができない時' do
+        it 'tokenが空の状態' do
+          @order_form.token = ''
+          @order_form.valid?
+          expect(@order_form.errors.full_messages).to include("Token can't be blank")
+        end
+
         it '郵便番号が記載されていない' do
           @order_form.postal_code = ''
           @order_form.valid?
