@@ -13,12 +13,12 @@ RSpec.describe OrderForm, type: :model do
         end
 
         it 'tokenが入っている' do
-          @order_form.token = "tok_abcdefghijk1111111111111111111111"
+          @order_form.token = 'tok_abcdefghijk1111111111111111111111'
           expect(@order_form).to be_valid
         end
 
         it '郵便番号が正しく入力されている' do
-          @order_form.postal_code = "321-7654"
+          @order_form.postal_code = '321-7654'
           expect(@order_form).to be_valid
         end
 
@@ -31,7 +31,7 @@ RSpec.describe OrderForm, type: :model do
           @order_form.city = '川崎市'
           expect(@order_form).to be_valid
         end
-        
+
         it '番地が記述されている' do
           @order_form.addresses = '中央1-1'
           expect(@order_form).to be_valid
@@ -58,25 +58,25 @@ RSpec.describe OrderForm, type: :model do
         it '郵便番号が記載されていない' do
           @order_form.postal_code = ''
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Postal code can't be blank", "Postal code is invalid")
+          expect(@order_form.errors.full_messages).to include("Postal code can't be blank", 'Postal code is invalid')
         end
 
         it '郵便番号にハイフンが含まれていない' do
           @order_form.postal_code = '1234567'
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Postal code is invalid")
+          expect(@order_form.errors.full_messages).to include('Postal code is invalid')
         end
 
         it '郵便番号のハイフン位置が適切ではない' do
           @order_form.postal_code = '1234-567'
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Postal code is invalid")
+          expect(@order_form.errors.full_messages).to include('Postal code is invalid')
         end
 
         it '都道府県が選択されていない' do
           @order_form.prefecture_id = '1'
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Prefecture must be other than 1")
+          expect(@order_form.errors.full_messages).to include('Prefecture must be other than 1')
         end
 
         it '市区町村が記述されていない' do
@@ -94,27 +94,26 @@ RSpec.describe OrderForm, type: :model do
         it '電話番号が記述されていない' do
           @order_form.phone_number = ''
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Phone number can't be blank", "Phone number is invalid")
+          expect(@order_form.errors.full_messages).to include("Phone number can't be blank", 'Phone number is invalid')
         end
 
         it '電話番号の桁が11桁より多い' do
           @order_form.phone_number = '090123456789'
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+          expect(@order_form.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
         end
 
         it '電話番号に全角数字が入力されている' do
           @order_form.phone_number = '０９０１２３４５６７８'
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Phone number is invalid")
+          expect(@order_form.errors.full_messages).to include('Phone number is invalid')
         end
 
         it '電話番号にハイフンが含まれている' do
           @order_form.phone_number = '090-123-456'
           @order_form.valid?
-          expect(@order_form.errors.full_messages).to include("Phone number is invalid")
+          expect(@order_form.errors.full_messages).to include('Phone number is invalid')
         end
-
       end
     end
   end
