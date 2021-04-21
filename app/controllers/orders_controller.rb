@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
       @order_form.save
       redirect_to root_path
     else
+      form_clear
       render action: :index
     end
   end
@@ -37,6 +38,15 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def form_clear
+    @order_form.postal_code.clear
+    @order_form.prefecture_id.clear
+    @order_form.city.clear
+    @order_form.addresses.clear
+    @order_form.building.clear
+    @order_form.phone_number.clear
   end
 
   def sold_out_item
