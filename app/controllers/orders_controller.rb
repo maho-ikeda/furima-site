@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :sold_out_item, only: [:index, :create]
   before_action :move_to_root, only: [:index, :create]
+  before_action :find_params, only: [:index, :create]
 
   def index
     find_params
@@ -31,8 +32,7 @@ class OrdersController < ApplicationController
   def order_params
     params.permit(:item_id)
     params.require(:order_form).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(
-      user_id: current_user.id, item_id: params[:item_id]
-    ).merge(token: params[:token])
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item

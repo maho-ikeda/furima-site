@@ -74,7 +74,7 @@ RSpec.describe OrderForm, type: :model do
         end
 
         it '都道府県が選択されていない' do
-          @order_form.prefecture_id = '1'
+          @order_form.prefecture_id = 1
           @order_form.valid?
           expect(@order_form.errors.full_messages).to include('Prefecture must be other than 1')
         end
@@ -119,6 +119,18 @@ RSpec.describe OrderForm, type: :model do
           @order_form.phone_number = '090123aaaa'
           @order_form.valid?
           expect(@order_form.errors.full_messages).to include('Phone number is invalid')
+        end
+
+        it 'ユーザーidが空' do
+          @order_form.user_id = ''
+          @order_form.valid?
+          expect(@order_form.errors.full_messages).to include("User can't be blank")
+        end
+
+        it 'アイテムidが空' do
+          @order_form.item_id = ''
+          @order_form.valid?
+          expect(@order_form.errors.full_messages).to include("Item can't be blank")
         end
       end
     end
