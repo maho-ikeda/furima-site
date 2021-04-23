@@ -4,13 +4,12 @@ class OrdersController < ApplicationController
   before_action :move_to_root, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
+    find_params
     @order_form = OrderForm.new
-    @order = Order.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    find_params
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
       pay_item
@@ -23,6 +22,11 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def find_params
+    @item = Item.find(params[:item_id])
+  end
+  
 
   def order_params
     params.permit(:item_id)
@@ -50,7 +54,7 @@ class OrdersController < ApplicationController
   end
 
   def sold_out_item
-    @item = Item.find(params[:item_id])
+    find_params
     redirect_to root_path if @item.order.present?
   end
 
