@@ -1,16 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :find_params, only: [:index, :create]
   before_action :sold_out_item, only: [:index, :create]
   before_action :move_to_root, only: [:index, :create]
-  before_action :find_params, only: [:index, :create]
 
   def index
-    find_params
     @order_form = OrderForm.new
   end
 
   def create
-    find_params
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
       pay_item
@@ -54,7 +52,6 @@ class OrdersController < ApplicationController
   end
 
   def sold_out_item
-    find_params
     redirect_to root_path if @item.order.present?
   end
 
